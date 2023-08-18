@@ -9,7 +9,8 @@ import '../../../Text1.dart';
 import '../../../shared/network/local/cache_helper.dart';
 import '../cubit_sign_up/cubit.dart';
 import '../cubit_sign_up/states.dart';
-import '../login_econo/signin.dart';
+import '../login_econo/login/signin.dart';
+import '../sign1.dart';
 
 
 class SigenUp extends StatelessWidget {
@@ -39,7 +40,7 @@ class SigenUp extends StatelessWidget {
               Navigator.push(context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        sign()),);
+                        sign1()),);
             }
         },
         builder: (context, state) {
@@ -89,6 +90,7 @@ class SigenUp extends StatelessWidget {
                                 text: 'Sign Up',
                                 size: 35,
                                 color: strongColor,
+                                font: 'BebasNeue Regular',
                               ),
                               SizedBox(height: 20),
                               Row(
@@ -226,6 +228,7 @@ class SigenUp extends StatelessWidget {
                             condition: state is! SignUpLodingState,
                             builder: (context) =>  DefaultButton(
                               color:strongColor,
+                              font: 'BebasNeue Regular',
                               text: 'Sign Up',
                               s: 25,
                               r: 30,

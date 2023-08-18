@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../models/user.dart';
 import '../../shared/components/components.dart';
 import '../main_home/main_home_screen.dart';
 import '../signin/signup_screen.dart';

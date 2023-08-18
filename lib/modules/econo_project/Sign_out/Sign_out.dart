@@ -2,7 +2,9 @@ import 'package:firstflutterproject/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:firstflutterproject/shared/network/local/cache_helper.dart';
 
-import '../login_econo/signin.dart';
+import '../login_econo/login/signin.dart';
+import '../sign1.dart';
+
 
 class SignOut extends StatelessWidget{
   @override
@@ -44,7 +46,7 @@ class SignOut extends StatelessWidget{
             if(value){
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => sign()),
+                  MaterialPageRoute(builder: (context) => sign1()),
                       (route) => false);
             }
           });

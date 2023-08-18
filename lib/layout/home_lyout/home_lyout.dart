@@ -31,7 +31,6 @@ class HomeLyoutScreen extends StatelessWidget{
                color: secondBackColor,
                fontWeight: FontWeight.w500)
            ),
-           backgroundColor: Colors.white,
            elevation: 0.0,
          ),
          drawer:NavigationDrawer1() ,
@@ -41,7 +40,6 @@ class HomeLyoutScreen extends StatelessWidget{
            selectedItemColor: strongColor,
            selectedLabelStyle: TextStyle(fontSize: 14),
            unselectedLabelStyle: TextStyle(fontSize: 13),
-           backgroundColor: veryverylightColor,
            elevation: 5.5,
            type:BottomNavigationBarType.fixed,
            currentIndex: cubit.curentindex,

@@ -25,7 +25,7 @@ class AccessoriesCubite extends Cubit<AccessoriesStates> {
       emit(AccessoriesSuccessHome());
     }).catchError((error) {
       print(error.toString());
-      emit(AccessoriesErrorHome());
+      emit(AccessoriesErrorHome(error.toString()));
     });
   }
 }

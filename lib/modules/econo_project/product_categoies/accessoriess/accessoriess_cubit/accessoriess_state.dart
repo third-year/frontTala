@@ -6,4 +6,7 @@ class AccessoriesLodingHome extends AccessoriesStates{}
 
 class AccessoriesSuccessHome extends AccessoriesStates{}
 
-class AccessoriesErrorHome extends AccessoriesStates{}
+class AccessoriesErrorHome extends AccessoriesStates{
+  final String? Error;
+  AccessoriesErrorHome(this.Error);
+}

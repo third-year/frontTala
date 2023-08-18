@@ -1,12 +1,14 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:firstflutterproject/modules/econo_project/login_econo/login_cubit/states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../Text1.dart';
-import '../../../constant.dart';
-import 'code.dart';
-import 'login_cubit/cubit.dart';
+
+import '../../../../Text1.dart';
+import '../../../../constant.dart';
+
+import '../../../../new_things/widget3/toast.dart';
+import '../login_cubit/cubit.dart';
+import '../login_cubit/states.dart';
 import 'newpassword.dart';
 
 class code extends StatelessWidget {
@@ -20,13 +22,14 @@ String email ;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) =>ELoginCubit(),
-        child: BlocConsumer<ELoginCubit,ELoginSates> (
+    return  BlocConsumer<ELoginCubit,ELoginSates> (
         listener:(context,state){
       if(state is CodeSuccessState){
          Navigator.push(context,
            MaterialPageRoute(builder: (context) => newpassword(code1:codecontroller.text)),);
+      }  if(state is CodeSuccessState){
+        toast(mas: 'entercode', colors: Colors.red);
+
       }
 
 
@@ -44,12 +47,15 @@ String email ;
                   key: formkay,
                   child: Column(children: [
                     SizedBox(height: 200,),
-                    Text1(text: "Password reset",size: 28,color: Colors.yellow,),
+                    Text1(text: 'Password reset',font: 'BebasNeue Regular'
+                      ,size: 30,
+                      color: Colors.yellow,),
                     SizedBox(height: 30,),
-                    Text1(text:'we sent a code to ',
-                      fontWeight: FontWeight.w300,),
+                    Text('we sent a code to'+email,
+                      style: Theme.of(context).textTheme.displayLarge,),
                     SizedBox(height: 20,),
-                    DefaultTextaField(hint: 'Code*',icon: Icons.create_sharp,
+                    DefaultTextaField(hint: 'Code*'
+                      ,icon: Icons.create_sharp,
                       controller:codecontroller,
 
                       color: Colors.grey[300],
@@ -63,7 +69,7 @@ String email ;
                     SizedBox(height: 30,),
                     ConditionalBuilder(
                       condition: state is! CodeLoadingState,
-                      builder:(context)=> DefaultButton(text: 'Continue',s: 25,
+                      builder:(context)=> DefaultButton(text:'Continue',s: 30,
                         onTap: (){
                         if(formkay.currentState!.validate()) {
                             ELoginCubit.get(context).codepaasswordc(
@@ -76,9 +82,10 @@ String email ;
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text1(text: "Didn't recieve the email?",fontWeight: FontWeight.w300,size: 18,),
-                        textbutton(text: ' Click to resend',onTap: (){
-
+                        Text('Didnt recieve the email?',
+                       style:Theme.of(context).textTheme.displayMedium
+                       ),
+                        textbutton(text:'Click to resend',onTap: (){
                           ELoginCubit.get(context).forgetpaasswordc(email:email);
 
                           },
@@ -94,5 +101,5 @@ String email ;
 
 
         ));
-    }));
+    });
     }}

@@ -21,7 +21,7 @@ class SalesScreen extends StatelessWidget {
         SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: ListView.separated(
-          itemBuilder: (context, index) => buildfavitem(SalesCubit.get(context).mysalesmodel!.data![index]),
+          itemBuilder: (context, index) => buildfavitem(SalesCubit.get(context).mysalesmodel!.data![index],context),
           separatorBuilder: (context, index) =>
               Divider(
                 height: 1.0,
@@ -64,15 +64,16 @@ class SalesScreen extends StatelessWidget {
     );
   }
 
-  Widget buildfavitem(SalesDataModel? model) =>
+  Widget buildfavitem(SalesDataModel? model,context) =>
       Padding(
           padding: const EdgeInsets.all(20.0),
           child: GestureDetector(
             child: Row(
               children: [
                 Image(
-                  image: NetworkImage(
-                  model!.product!.image!.toString()),
+                  image: MemoryImage(
+                      convertBase64Image(
+                          model!.product!.image.toString())),
                   width: 120.0,
                   height: 120.0,
                 ),
@@ -84,8 +85,7 @@ class SalesScreen extends StatelessWidget {
                   children: [
                     Text(
                       model!.product!.name!.toString(),
-                      style: TextStyle(
-                          fontSize: 25.0, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headlineMedium
                     ),
                     SizedBox(
                       height: 20.0,

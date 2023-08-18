@@ -7,8 +7,6 @@ import '../../../constant.dart';
 import '../add_product/cubit_product.dart';
 import '../add_product/state_product.dart';
 
-
-
 class chargr_wallet extends StatelessWidget {
 
   var charge=TextEditingController();
@@ -22,7 +20,20 @@ class chargr_wallet extends StatelessWidget {
         listener:(context,state){},
     builder: (context,state) {
     return  Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {},
+            icon: Icon(Icons.account_balance_wallet_rounded, size: 35.0,),
+            color: strongColor,
+          ),
+        ],
+        title: Text('charge wallet'.toUpperCase(),
+            style: TextStyle(fontSize: 30.0,
+                color: secondBackColor,
+                fontWeight: FontWeight.w500)
+        ),
+        elevation: 0.0,
+      ),
       body: Container(
 
         decoration: BoxDecoration(
@@ -40,7 +51,7 @@ class chargr_wallet extends StatelessWidget {
                 SizedBox(height: 100,),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text1( text: 'description :',size: 18,fontWeight:FontWeight.w400),
+                  child: Text('amount',style: Theme.of(context).textTheme.headline6),
                 ),
                 SizedBox(height: 10,),
                 DefaultTextaField(

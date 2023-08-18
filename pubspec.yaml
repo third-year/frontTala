@@ -54,6 +54,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   intl: ^0.17.0
   geolocator: ^9.0.2
+  fluttertoast: ^8.2.2
   #image_picker:
 
 #  flutter_easyloading: ^1.3.0
@@ -79,7 +80,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
      - images/
@@ -96,15 +97,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-#  fonts:
-#     - family: Schyler
-#       fonts:
-#         - asset: fonts/Schyler-Regular.ttf
-#         - asset: fonts/Schyler-Italic.ttf
-#           style: italic
-#     - family: Trajan Pro
-#       fonts:
-#         - asset: fonts/TrajanPro.ttf
+  fonts:
+     - family: Mulish Medium
+       fonts:
+         - asset: assets/fonts/Mulish-MediumItalic.ttf
+         - asset: assets/fonts/Mulish-Medium.ttf
+           style: italic
+     - family: BebasNeue Regular
+       fonts:
+         - asset: assets/fonts/BebasNeue-Regular.ttf
 #         - asset: fonts/TrajanPro_Bold.ttf
 #           weight: 700
 

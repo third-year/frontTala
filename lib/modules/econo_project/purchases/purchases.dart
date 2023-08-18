@@ -17,7 +17,7 @@ class PurchasesScreen extends StatelessWidget{
           builder: (context)=>SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: ListView.separated(
-        itemBuilder: (context, index) => buildfavitem(OrderCubit.get(context).myordermodel!.data![index]),
+        itemBuilder: (context, index) => buildfavitem(OrderCubit.get(context).myordermodel!.data![index],context),
         separatorBuilder: (context, index) => Divider(
           height: 1.0,
           thickness: 2.0,
@@ -35,14 +35,15 @@ class PurchasesScreen extends StatelessWidget{
   }
     );
   }
-  Widget buildfavitem(DataModel? model) => Padding(
+  Widget buildfavitem(DataModel? model,context) => Padding(
       padding: const EdgeInsets.all(20.0),
       child: GestureDetector(
         child: Row(
           children: [
             Image(
-              image: NetworkImage(
-                  model!.product!.image!.toString()),
+              image: MemoryImage(
+                  convertBase64Image(
+                      model!.product!.image.toString())),
               width: 120.0,
               height: 120.0,
             ),
@@ -54,7 +55,7 @@ class PurchasesScreen extends StatelessWidget{
               children: [
                 Text(
                   model!.product!.name.toString(),
-                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                  style:  Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(
                   height: 20.0,

@@ -4,6 +4,7 @@ import 'package:firstflutterproject/modules/econo_project/about_app/about_app.da
 import 'package:firstflutterproject/modules/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../layout/home_lyout/cubite/cubite.dart';
 import '../modules/econo_project/Settings/settings.dart';
 import '../modules/econo_project/Sign_out/Sign_out.dart';
 import '../modules/econo_project/charge_wallet/charge_wallet.dart';
@@ -20,52 +21,49 @@ class  NavigationDrawer1 extends StatelessWidget {
         child:Drawer(
 
           child:   Material(
-            color:Colors.white,
+              child: Column(
+                  children: [
+                    Header( ),
+                    DrawerItem(
+                      name:"Profile",
+                      icon:Icons.person,
+                      onPressed:()=> onItemPressed(context,index:0),
 
-            child: Column(
-                children: [
+                    ), SizedBox(height: 20,),
 
-                  Header( ),
-
-                  DrawerItem(
-                    name:"Profile",
-                    icon:Icons.person,
-                    onPressed:()=> onItemPressed(context,index:0),
-
-                  ), SizedBox(height: 20,),
-
-                  Divider(thickness: 1,height: 9,color:Colors.black,),
-                  DrawerItem(
-                    name:"Wallet",
-                    icon:Icons.wallet,
-                    onPressed:()=> onItemPressed(context,index:1),
-                  ),
-                  SizedBox(height: 20,),
-                  Divider(thickness: 1,height: 9,color:Colors.black,),
-                  DrawerItem(
-                    name:"Settings",
-                    icon:Icons.settings,
-                    onPressed:()=> onItemPressed(context,index:2),
-                  ),
-                  SizedBox(height: 20,),
-                  Divider(thickness: 1,height: 9,color:Colors.black,),
-                  DrawerItem(
-                    name:"About",
-                    icon:Icons.book,
-                    onPressed:()=> onItemPressed(context,index:3),
-                  ),
-                  SizedBox(height: 20,),
-                  Divider(thickness: 1,height: 9,color:Colors.black,),
-                  DrawerItem(
-                    name:"Sign out",
-                    icon:Icons.logout_outlined,
-                    onPressed:()=> onItemPressed(context,index:4),
-                  ),
-                ]
+                    Divider(thickness: 1,height: 9,color:Colors.black,),
+                    DrawerItem(
+                      name:"Wallet",
+                      icon:Icons.wallet,
+                      onPressed:()=> onItemPressed(context,index:1),
+                    ),
+                    SizedBox(height: 20,),
+                    Divider(thickness: 1,height: 9,color:Colors.black,),
+                    DrawerItem(
+                      name:"Settings",
+                      icon:Icons.settings,
+                      onPressed:()=> onItemPressed(context,index:2),
+                    ),
+                    SizedBox(height: 20,),
+                    Divider(thickness: 1,height: 9,color:Colors.black,),
+                    DrawerItem(
+                      name:"About",
+                      icon:Icons.book,
+                      onPressed:()=> onItemPressed(context,index:3),
+                    ),
+                    SizedBox(height: 20,),
+                    Divider(thickness: 1,height: 9,color:Colors.black,),
+                    DrawerItem(
+                      name:"Sign out",
+                      icon:Icons.logout_outlined,
+                      onPressed:()=> onItemPressed(context,index:4),
+                    ),
+                  ]
+              ),
             ),
 
           ),
-        ));
+        );
   }
   void onItemPressed(BuildContext context,{required int index}){
     Navigator.pop(context);

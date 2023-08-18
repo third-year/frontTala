@@ -30,7 +30,6 @@ class EconoEditeProfileScreen extends StatelessWidget {
                     size: 40.0,
                   )
                 ],
-                backgroundColor: Colors.white,
                 elevation: 0.0,
               ),
               body: Form(

@@ -45,6 +45,9 @@ class EconoCubite extends Cubit<EconoStates> {
 
   Map<dynamic,bool>isFav={};
 
+  List<ProductsModel> maxprice=[];
+  List<ProductsModel> maxrate=[];
+
 
   void changBottom(int index) {
     curentindex = index;
@@ -220,5 +223,28 @@ List<ProductsModel> resultname=[];
                 ));
     emit(EconoSuccessgotoditels());
   }
+
+  // dynamic maxpricev=0;
+  // dynamic maxratev=0;
+  // void getmax(){
+  //   names.forEach((element) {
+  //     if(element.price>maxprice){
+  //       maxprice=element.price;
+  //     }
+  //     names.sort(maxprice);
+  //   });
+  // }
+
+
+  bool isDark = false;
+  ThemeMode appMode = ThemeMode.dark;
+
+  void changAppMode(){
+    isDark = !isDark;
+    emit(ChangeModeState());
+    print(isDark);
+
+  }
+
 
 }

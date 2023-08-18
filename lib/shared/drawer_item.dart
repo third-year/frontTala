@@ -1,3 +1,4 @@
+import 'package:firstflutterproject/layout/home_lyout/cubite/cubite.dart';
 import 'package:flutter/material.dart';
 
 import '../constant.dart';
@@ -24,7 +25,8 @@ class DrawerItem extends StatelessWidget {
 
             Icon(icon,size:25,color:midColor,),
             SizedBox(width: 25),
-            Text(name , style:TextStyle(fontSize: 15,color: firstBackColor, ),  )
+            Text(name , style:TextStyle(fontSize: 15,
+              color: EconoCubite.get(context).isDark?Colors.white:strongColor, ),  )
           ],
         )
         ));

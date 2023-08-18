@@ -1,3 +1,4 @@
+import 'package:firstflutterproject/modules/econo_project/login_econo/login/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -49,7 +50,7 @@ class _OnBoardingState extends State<OnBoarding> {
      // if(value==true){
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => Details()),
+            MaterialPageRoute(builder: (context) => sign()),
                 (route) => true);
     //  }
    // }

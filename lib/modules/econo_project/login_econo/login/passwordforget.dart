@@ -1,30 +1,33 @@
 
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:firstflutterproject/modules/econo_project/login_econo/login_cubit/cubit.dart';
-import 'package:firstflutterproject/modules/econo_project/login_econo/login_cubit/states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../Text1.dart';
-import '../../../constant.dart';
+import '../../../../Text1.dart';
+import '../../../../constant.dart';
+import '../../../../new_things/widget3/toast.dart';
+import '../login_cubit/cubit.dart';
+import '../login_cubit/states.dart';
 import 'code.dart';
+
 
 class passwordForget extends StatelessWidget {
   var emailcontroller=TextEditingController();
   var formkay =GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) =>ELoginCubit(),
-        child: BlocConsumer<ELoginCubit,ELoginSates> (
+    return  BlocConsumer<ELoginCubit,ELoginSates> (
             listener:(context,state){
               if(state is ForgetSuccessState){
                 Navigator.push(context,
                   MaterialPageRoute(builder: (context) => code(email: emailcontroller.text)),);
                 
-              }
+              } if(state is ForgetErrorState){
+                
+                toast(mas:'enteremail' , colors:Colors.red);
+              }else{}
               
               
             },
@@ -44,17 +47,19 @@ class passwordForget extends StatelessWidget {
                               key: formkay,
                               child: Column(children: [
                                 SizedBox(height: 200,),
-                                Text1(text: "Find your account",size: 28,color: Colors.yellow[700],),
+                                Text1(text:'Find your account',size: 30,color: Colors.yellow[700],font: 'BebasNeue Regular',),
                                 SizedBox(height: 8,),
                                 Center(
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
-                                    child: Text1(text:"no worries , we'll send you reset instructions",
-                                      fontWeight: FontWeight.w300,),
+                                    child:
+                                    Text(
+                                      'no worries , well send you reset instructions',
+                                      style: Theme.of(context).textTheme.displayLarge,),
                                   ),
                                 ),
                                 SizedBox(height: 20,),
-                                DefaultTextaField(hint: 'enter the email',
+                                DefaultTextaField(hint:'Enter your email',
                                   controller:emailcontroller,
                                   icon: Icons.person,
                                   color: Colors.grey[300],
@@ -68,7 +73,8 @@ class passwordForget extends StatelessWidget {
                                 SizedBox(height: 40,),
                                 ConditionalBuilder(
                                   condition: state is! ForgetLoadingState,
-                                  builder:(context)=> DefaultButton(text: 'Reset password',s: 25,
+                                  builder:(context)=> DefaultButton(text:'Reset password',
+                                    s: 25,
                                     onTap: (){
 
                                       if(formkay.currentState!.validate()) {
@@ -90,6 +96,6 @@ class passwordForget extends StatelessWidget {
                     )
                 );
 
-            } ));
+            } );
   }
 }

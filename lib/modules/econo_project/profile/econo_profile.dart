@@ -26,7 +26,6 @@ class EconoProfileScreen extends StatelessWidget{
                 color: secondBackColor,
                 size: 40.0,
               )],
-              backgroundColor: Colors.white,
               elevation: 0.0,
             ),
             body: Center(
@@ -34,9 +33,11 @@ class EconoProfileScreen extends StatelessWidget{
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(children: [
-                    // CircleAvatar(
-                    //     radius: 100.0,
-                    //     backgroundImage:NetworkImage(ProfileCubit.get(context).profilemodel!.user!.image.toString())),
+                    CircleAvatar(
+                        radius: 100.0,
+                        backgroundImage:MemoryImage(
+                            convertBase64Image(
+                          ProfileCubit.get(context).profilemodel!.user!.image.toString()))),
                     SizedBox(height: 40.0,),
                     Container(
                       child:

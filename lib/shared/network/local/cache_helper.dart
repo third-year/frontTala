@@ -34,4 +34,17 @@ class CacheHelper {
 })async{
     return await sharedPreferences.remove(key);
   }
+
+  static Future<bool?> savetoken({
+    required String key,
+    required String value,
+  }) async
+  {
+    return await sharedPreferences.setString(key, value);
+  }
+  static dynamic gettoken({
+    required String key,
+  }) {
+    return sharedPreferences.getString(key);
+  }
 }

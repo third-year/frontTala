@@ -7,7 +7,7 @@ class LoginInitialState extends ELoginSates{}
 
 class LoginLoadingState extends ELoginSates{}
 class LoginSuccessState extends ELoginSates{
-  late final   Login_Models loginModel;
+   final   Login_Models? loginModel;
   LoginSuccessState(this.loginModel);
 }
 class LoginErrorState extends ELoginSates{}

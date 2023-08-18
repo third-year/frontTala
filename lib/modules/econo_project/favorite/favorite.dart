@@ -45,8 +45,9 @@ class FavoriteScreen extends StatelessWidget {
         child: Row(
           children: [
             Image(
-              image: NetworkImage(
-        model.product!.image.toString(),),
+              image: MemoryImage(
+        convertBase64Image(
+        model.product!.image.toString())),
               width: 120.0,
               height: 120.0,
             ),
@@ -58,7 +59,7 @@ class FavoriteScreen extends StatelessWidget {
               children: [
                 Text(
                   model.product!.name.toString(),
-                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(
                   height: 20.0,

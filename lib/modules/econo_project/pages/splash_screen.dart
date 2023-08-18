@@ -1,12 +1,13 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firstflutterproject/layout/home_lyout/home_lyout.dart';
-import 'package:firstflutterproject/modules/econo_project/login_econo/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../layout/home_lyout/cubite/cubite.dart';
 import '../../../shared/components/constants.dart';
 import '../../../shared/network/local/cache_helper.dart';
+import '../login_econo/login/signin.dart';
+import '../sign1.dart';
 import 'on_bording.dart';
 
 class Splash extends StatelessWidget {
@@ -17,7 +18,7 @@ class Splash extends StatelessWidget {
   Widget build(BuildContext context) {
      Widget widget;
     dynamic onBoarding = CacheHelper.getData(key: 'onboarding');
-    token=CacheHelper.getData(key: 'token');
+    token=CacheHelper.gettoken(key: 'token');
     print(token.toString());
     print(onBoarding);
 
@@ -26,7 +27,7 @@ class Splash extends StatelessWidget {
         EconoCubite.get(context).gethomedata();
         EconoCubite.get(context).getFav();
         widget = HomeLyoutScreen();}
-      else widget = sign();
+      else widget = sign1();
     }
       else{
         widget=OnBoarding();

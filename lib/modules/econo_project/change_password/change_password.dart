@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shared/components/constants.dart';
 import '../../../shared/network/local/cache_helper.dart';
-import '../login_econo/passwordforget.dart';
+import '../login_econo/login/passwordforget.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   var oldpasscontroller = TextEditingController();
@@ -40,7 +40,6 @@ class ChangePasswordScreen extends StatelessWidget {
                         size: 40.0,
                       )
                     ],
-                    backgroundColor: Colors.white,
                     elevation: 0.0,
                   ),
                   body: Form(
@@ -54,8 +53,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                       children: [
                                         Center(
                                           child: Text('Pleas Enter Your Old Password',
-                                            style: TextStyle(fontSize: 25.0,
-                                                fontWeight: FontWeight.w400),),
+                                            style:  Theme.of(context).textTheme.headlineSmall,),
                                         ),
                                         SizedBox(
                                           height: 40.0,

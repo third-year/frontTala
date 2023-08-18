@@ -5,9 +5,11 @@ import 'package:firstflutterproject/layout/home_lyout/cubite/cubite.dart';
 import 'package:firstflutterproject/models/econo_app/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../Text1.dart';
 import '../../../layout/home_lyout/cubite/states.dart';
 
 class ProdactScreen extends StatelessWidget {
+  String selectstatus = 'new';
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<EconoCubite, EconoStates>(
@@ -32,12 +34,12 @@ class ProdactScreen extends StatelessWidget {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRjLz3kJ2-jsPbJqEAOePdvrxI23ZHaV3mXj0RKrofjJZqNHs3c2jhK2npyoTa0naT9ZI&usqp=CAU',
     'https://cdn-icons-png.flaticon.com/512/687/687263.png',
     'https://cdn-icons-png.flaticon.com/512/88/88746.png?w=360',
-'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvSsgBRoWzXXIjBnaskRdOzDbooSHIPoNXhg&usqp=CAU',
-'https://static.vecteezy.com/system/resources/thumbnails/002/205/948/small/gift-box-icon-free-vector.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvSsgBRoWzXXIjBnaskRdOzDbooSHIPoNXhg&usqp=CAU',
+    'https://static.vecteezy.com/system/resources/thumbnails/002/205/948/small/gift-box-icon-free-vector.jpg',
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCkyIETUrVuFX-NqXCVzvXNb6c7098OpX45k6gZR9_YOR5DS7WqYfqZFE4Sk17rqo1sLw&usqp=CAU'
   ];
 
-  List<String>categories = [
+  List<String> categories = [
     'furniture',
     'accessories',
     'food',
@@ -98,7 +100,7 @@ class ProdactScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
-                color: Colors.white,
+                color:EconoCubite.get(context).isDark? Color(0xFF333739):Colors.white,
                 height: 190.0,
                 width: double.infinity,
                 child: GridView.count(
@@ -113,57 +115,68 @@ class ProdactScreen extends StatelessWidget {
                     categories.length,
                     (index) => Container(
                         color: Colors.black,
-                        child: buildGridCategories(
-                            categories[index],
-                            photocategories[index],
-                            index,
-                            context)),
+                        child: buildGridCategories(categories[index],
+                            photocategories[index], index, context)),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 30.0),
+            // SizedBox(height: 30.0),
+            // Text1(text: 'status :', size: 18, fontWeight: FontWeight.w400),
+            // SizedBox(
+              //height: 10,
+           // ),
+            // DropdownButton(
+            //     //padding:  EdgeInsets.only(left: 8.0),
+            //     isExpanded: true,
+            //     value: selectstatus,
+            //     items: [
+            //       DropdownMenuItem(child: Text('price'), value: 'price'),
+            //       DropdownMenuItem(child: Text("rate"), value: "rate"),
+            //     ],
+            //     onChanged: (value) {
+            //       selectstatus = value!;
+            //       print(value);
+            //     }),
             Padding(
-                padding: const EdgeInsets.all(8.0),
-                child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    'New Products',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35.0,
-                        color: midColor),
-                  ),
-  //                 SizedBox(
-  //                   height: 10.0,
-  //                 ),
-  //               Text('order by',
-  // style: TextStyle(fontWeight: FontWeight.w400,
-  // fontSize: 15.0
-  // ),
-  //
-  // ),
-  //               DropdownButton(
-  //                   isExpanded: true,
-  //                   value: 'Rate',
-  //                   items: [
-  //                     DropdownMenuItem(child:Text('price') ,value: 'price'),
-  //                     DropdownMenuItem(child:Text('rate') ,value: 'rate),
-  //                   ],
-  //                   onChanged:(value){
-  //
-  //                       print(value);
-  //                     })
-                ]
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'New Products',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35.0,
+                          color: midColor),
                     ),
-                ),
+                    //                 SizedBox(
+                    //                   height: 10.0,
+                    //                 ),
+                    //               Text('order by',
+                    // style: TextStyle(fontWeight: FontWeight.w400,
+                    // fontSize: 15.0
+                    // ),
+                    //
+                    // ),
+                    //               DropdownButton(
+                    //                   isExpanded: true,
+                    //                   value: 'Rate',
+                    //                   items: [
+                    //                     DropdownMenuItem(child:Text('price') ,value: 'price'),
+                    //                     DropdownMenuItem(child:Text('rate') ,value: 'rate),
+                    //                   ],
+                    //                   onChanged:(value){
+                    //
+                    //                       print(value);
+                    //                     })
+                  ]),
+            ),
             SizedBox(
               height: 30.0,
             ),
             Container(
-              color: Colors.grey[300],
+              color:EconoCubite.get(context).isDark?  Color(0xFF333739):Colors.white,
               child: GridView.count(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -171,27 +184,27 @@ class ProdactScreen extends StatelessWidget {
                 mainAxisSpacing: 1.5,
                 crossAxisSpacing: 1.5,
                 childAspectRatio: 1 / 1.44,
-                children: List.generate(
-                    model!.data!.resultProducts!.length,
-                    (index) {
-                      return buildGridProduct(
-                        model.data!.resultProducts![index],context);
-                    }),
+                children:
+                    List.generate(model!.data!.resultProducts!.length, (index) {
+                  return buildGridProduct(
+                      model.data!.resultProducts![index], context);
+                }),
               ),
             )
           ],
         ),
       );
-  Widget buildGridProduct(ProductsModel model,context) => GestureDetector(
-    onTap: (){
-      EconoCubite.get(context).gotoditels(model.id,context);
-    },
-          child: Container(
-        color: Colors.white,
+  Widget buildGridProduct(ProductsModel model, context) => GestureDetector(
+      onTap: () {
+        EconoCubite.get(context).gotoditels(model.id, context);
+      },
+      child: Container(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Stack(alignment: AlignmentDirectional.bottomStart, children: [
             Image(
-              image: NetworkImage(model.image.toString()),
+              image: MemoryImage(
+                  convertBase64Image(
+                  model.image.toString())),
               width: double.infinity,
               fit: BoxFit.cover,
               height: 200,
@@ -216,7 +229,7 @@ class ProdactScreen extends StatelessWidget {
                   model.name.toString(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 14.0, height: 1.3),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Row(
                   children: [
@@ -231,17 +244,18 @@ class ProdactScreen extends StatelessWidget {
                     Spacer(),
                     IconButton(
                       onPressed: () {
-                        if(EconoCubite.get(context).isFav[model.id]==false) {
+                        if (EconoCubite.get(context).isFav[model.id] == false) {
                           EconoCubite.get(context).addFav(model.id);
-                        }
-                        else{
+                        } else {
                           EconoCubite.get(context).delFav(model.id);
                         }
                       },
                       icon: Icon(
                         Icons.favorite,
                         size: 30.0,
-                        color: EconoCubite.get(context).isFav[model.id]==true ?Colors.red :Colors.grey,
+                        color: EconoCubite.get(context).isFav[model.id] == true
+                            ? Colors.red
+                            : Colors.grey,
                       ),
                     )
                   ],
@@ -255,10 +269,10 @@ class ProdactScreen extends StatelessWidget {
           String catename, String catphoto, int index, context) =>
       GestureDetector(
         onTap: () {
-          EconoCubite.get(context).gotocate(index,context,catename);
+          EconoCubite.get(context).gotocate(index, context, catename);
         },
         child: Container(
-          color: Colors.white,
+          color:EconoCubite.get(context).isDark? Color(0xFF333739):Colors.white,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),

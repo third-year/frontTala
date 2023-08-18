@@ -38,6 +38,13 @@ class EconoErrorsearch extends EconoStates{}
 
 class EconoSuccessgotoditels extends EconoStates{}
 
+class EconoLodingsort extends EconoStates{}
+
+class EconoSuccesssort extends EconoStates{}
+
+class EconoErrorsort extends EconoStates{}
+
+class ChangeModeState extends EconoStates{}
 
 
 

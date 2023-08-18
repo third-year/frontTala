@@ -48,7 +48,6 @@ class ShoseScreen extends StatelessWidget {
                     color: secondBackColor,
                     fontWeight: FontWeight.w500)
             ),
-            backgroundColor: Colors.white,
             elevation: 0.0,
           ),
           body: SingleChildScrollView(
@@ -72,7 +71,7 @@ class ShoseScreen extends StatelessWidget {
                           height: 30.0,
                         ),
                         Container(
-                          color: Colors.grey[300],
+                          color:EconoCubite.get(context).isDark? Color(0xFF333739):Colors.white,
                           child: GridView.count(
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
@@ -102,11 +101,13 @@ class ShoseScreen extends StatelessWidget {
         EconoCubite.get(context).gotoditels(model.id,context);
       },
       child: Container(
-        color: Colors.white,
+        color:EconoCubite.get(context).isDark? Color(0xFF333739):Colors.white,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Stack(alignment: AlignmentDirectional.bottomStart, children: [
             Image(
-              image: NetworkImage(model.image.toString()),
+              image:  MemoryImage(
+                  convertBase64Image(
+                      model.image.toString())),
               width: double.infinity,
               fit: BoxFit.cover,
               height: 200,
@@ -131,7 +132,7 @@ class ShoseScreen extends StatelessWidget {
                   model.name.toString(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 14.0, height: 1.3),
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 Row(
                   children: [

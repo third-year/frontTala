@@ -1,13 +1,12 @@
-
-import 'package:firstflutterproject/modules/econo_project/login_econo/login_cubit/states.dart';
-import 'package:firstflutterproject/modules/econo_project/login_econo/signin.dart';
+import 'package:firstflutterproject/modules/econo_project/login_econo/login/signin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../Text1.dart';
-import '../../../constant.dart';
-import 'login_cubit/cubit.dart';
 
+import '../../../../Text1.dart';
+import '../../../../constant.dart';
+import '../login_cubit/cubit.dart';
+import '../login_cubit/states.dart';
 
 class newpassword extends StatelessWidget {
   dynamic code1;
@@ -19,9 +18,7 @@ newpassword({required this.code1});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) =>ELoginCubit(),
-        child: BlocConsumer<ELoginCubit,ELoginSates> (
+    return  BlocConsumer<ELoginCubit,ELoginSates> (
         listener:(context,state){
       if(state is NewSuccessState){
         Navigator.push(context,
@@ -47,7 +44,8 @@ newpassword({required this.code1});
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Text1(text: 'Set new password',size: 30,color: Colors.yellow[700],),
+                    Text1(text:'Set new password',size: 35,color: Colors.yellow[700],
+                      font: 'BebasNeue Regular',),
                     SizedBox(height: 25,),
                     Text1(text: 'Must be at least 8 characters',
                       fontWeight: FontWeight.w300,
@@ -62,7 +60,7 @@ newpassword({required this.code1});
                   controller: passcontroller,
                   color: Colors.grey[300],
                   validate1:   ( value){
-                    if(value==null ||value.isEmpty){ return 'please enter your new password';}
+                    if(value==null ||value.isEmpty){ return 'please enter your password';}
                     return null;},
 
                   obscure:  ELoginCubit.get(context).ispassword,
@@ -77,7 +75,7 @@ newpassword({required this.code1});
 
 
               SizedBox(height: 25,),
-              DefaultTextaField(hint: 'Confirm Password',
+              DefaultTextaField(hint:'Confirm Password',
                 controller: passwordcontroller,
                 color: Colors.grey[300],color1: Color(0xFF439A97),
                 validate1:   ( value){
@@ -101,11 +99,9 @@ newpassword({required this.code1});
                     conpassword: passwordcontroller.text,
                     code1: code1.toString(),
                   );
-                }},s: 25,),
+                }},s: 30,),
 
-TextButton(onPressed: (){
 
-}, child: Text("ggggggg"))
 
 
             ],),
@@ -117,7 +113,7 @@ TextButton(onPressed: (){
 
     ));
     }
-    ));
+    );
   }
 
 }

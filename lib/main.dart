@@ -5,6 +5,7 @@ import 'package:firstflutterproject/layout/home_lyout/cubite/cubite.dart';
 import 'package:firstflutterproject/layout/home_lyout/cubite/states.dart';
 import 'package:firstflutterproject/modules/avilabeldayes/avilabel_dayes.dart';
 import 'package:firstflutterproject/modules/econo_project/change_password/change_password.dart';
+import 'package:firstflutterproject/modules/econo_project/login_econo/login/signin.dart';
 import 'package:firstflutterproject/modules/econo_project/pages/splash_screen.dart';
 import 'package:firstflutterproject/modules/econo_project/product_ditels/ditels_cubite/cubit_details.dart';
 import 'package:firstflutterproject/modules/econo_project/profile/econo_profile.dart';
@@ -15,6 +16,8 @@ import 'package:firstflutterproject/modules/signin/signup_screen.dart';
 import 'package:firstflutterproject/modules/splash/splash_screen.dart';
 import 'package:firstflutterproject/shared/bloc_observer.dart';
 import 'package:firstflutterproject/shared/components/constants.dart';
+import 'package:firstflutterproject/shared/network/language/cubit_lan.dart';
+import 'package:firstflutterproject/shared/network/language/status_lan.dart';
 import 'package:firstflutterproject/shared/network/local/cache_helper.dart';
 import 'package:firstflutterproject/shared/network/remote/dio_helper.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +38,7 @@ import 'modules/econo_project/product_categoies/shoses/shose_cubit/shose_cubit.d
 import 'modules/econo_project/product_categoies/technology/technology_cubit/technology_cubit.dart';
 import 'modules/econo_project/purchases/order_cubit/order_cubite.dart';
 import 'modules/econo_project/sales/sales_cubit/sales_cubit.dart';
+import 'modules/econo_project/sign1.dart';
 
 
 void main() async{
@@ -88,64 +92,190 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => EconoCubite()),
         BlocProvider(
             create: (BuildContext context) => DetailsCubit()),
+        BlocProvider(
+            create: (BuildContext context) => LanCubit()..getSavedLanguage()),
+
       ],
-          child: BlocConsumer<EconoCubite, EconoStates>(
+          child: BlocConsumer<EconoCubite,EconoStates>(
               listener: (context, state) {},
               builder: (context, state) {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(
-                    textTheme: TextTheme(
-                      bodyText1: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.black),
+                    drawerTheme:DrawerThemeData(backgroundColor: Colors.white
+                    ,surfaceTintColor: Colors.white,
+                      scrimColor: Colors.white
                     ),
-                    scaffoldBackgroundColor: Colors.white,
+                    scaffoldBackgroundColor:Colors.white,
+                    colorScheme:ColorScheme.light(),
+                    backgroundColor:Colors.white ,
                     appBarTheme: AppBarTheme(
-                        backgroundColor: Colors.white,
-                        backwardsCompatibility: false,
-                        systemOverlayStyle: SystemUiOverlayStyle(
-                            statusBarColor: Colors.white,
-                            statusBarBrightness: Brightness.dark),
                         elevation: 0.0,
+                        backgroundColor: Colors.white,
                         titleTextStyle: TextStyle(
-                            color: Colors.blueAccent,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold),
-                        iconTheme: IconThemeData(color: Colors.lightBlue)),
+                          color: Color(0xFF333739),
+                          fontFamily: 'Mulish Medium'
+                        ),
+                        iconTheme: IconThemeData(
+                            color:Color(0xFF333739),
+                        )
+                    ),
                     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                        type: BottomNavigationBarType.fixed,
-                        selectedItemColor: Colors.blueAccent,
-                        elevation: 20.0),
+                      backgroundColor:Colors.white,
+                      selectedItemColor: strongColor,
+                      unselectedItemColor: Colors.grey,
+                    ),
+                    textTheme: TextTheme(
+                      //1تالة
+                      headlineLarge: TextStyle(
+                            fontSize: 14,
+                            height: 1.3,
+                            color: Colors.black87,
+                          fontFamily: 'Mulish Medium'),
+                        //تالة2
+                      headlineMedium: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          fontFamily: 'Mulish Medium'
+
+                      ),
+                        //تالة3
+                      headlineSmall: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black87,
+                          fontFamily: 'Mulish Medium'
+
+                      ),
+                        //5+4+زينة1
+                        displayLarge: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black87,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+                        //زينة2
+                      displayMedium: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black87,
+                          fontFamily: 'Mulish Medium'
+
+                      ),
+                        //زينة 6 + 7
+                      displaySmall: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black87,
+                          fontFamily: 'Mulish Medium'
+
+                      ),
+
+                      //zena3
+                      bodyLarge: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black87,
+                          fontFamily: 'Mulish Medium'
+
+                      ),
+                    ),
+
+
                   ),
+
+
                   darkTheme: ThemeData(
-                      scaffoldBackgroundColor: Colors.black26,
-                      appBarTheme: AppBarTheme(
-                          backgroundColor: Colors.white,
-                          backwardsCompatibility: false,
-                          systemOverlayStyle: SystemUiOverlayStyle(
-                              statusBarColor: Colors.white,
-                              statusBarBrightness: Brightness.dark),
-                          elevation: 0.0,
-                          titleTextStyle: TextStyle(
-                              color: Colors.blueAccent,
-                              fontSize: 25.0,
-                              fontWeight: FontWeight.bold),
-                          iconTheme: IconThemeData(color: Colors.lightBlue)),
-                      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                          type: BottomNavigationBarType.fixed,
-                          selectedItemColor: Colors.blueAccent,
-                          unselectedItemColor: Colors.grey,
-                          elevation: 20.0),
-                      textTheme: TextTheme(
-                          bodyText1: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                              color: Colors.white)
-                      )
+                    drawerTheme:DrawerThemeData(backgroundColor: Colors.black45,
+                    scrimColor: Colors.black45,
+                      surfaceTintColor: Colors.black45
+                    ),
+                    colorScheme: ColorScheme.dark(),
+                    scaffoldBackgroundColor:Color(0xFF333739),
+                    backgroundColor: Color(0xFF333739),
+                    appBarTheme: AppBarTheme(
+                        elevation: 0.0,
+                        backgroundColor: Colors.black12,
+                        titleTextStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        iconTheme: IconThemeData(
+                            color: Colors.white
+                        )
+                    ),
+                    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                      backgroundColor: Color(0xFF333739),
+                      type: BottomNavigationBarType.fixed,
+                        selectedItemColor:Colors.white,
+                        unselectedItemColor: Colors.grey
+
+                    ),
+                    textTheme: TextTheme(
+                      //zena3
+                      bodyLarge: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.white,
+                          fontFamily: 'Mulish Medium'
+
+
+                      ),
+                      //1تالة
+                        headlineLarge: TextStyle(
+                            fontSize: 14,
+                            height: 1.3,
+                            color: Colors.white,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+                        //تالة2
+                        headlineMedium: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+                        //تالة3
+                        headlineSmall: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+                        //5+4+زينة1
+                        displayLarge: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+                        //زينة2
+                        displayMedium: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+                        //زينة 6 + 7
+                        displaySmall: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontFamily: 'Mulish Medium'
+
+                        ),
+
+
+                    ),
+
                   ),
-                  themeMode: ThemeMode.light,
+                  themeMode:EconoCubite.get(context).isDark?ThemeMode.dark:ThemeMode.light,
                   home: Splash(),
                 );
               }

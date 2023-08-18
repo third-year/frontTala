@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../layout/home_lyout/home_lyout.dart';
 import '../../../../models/econo_app/login_model.dart';
 import '../../../../shared/components/constants.dart';
 import '../../../../shared/network/end_points.dart';
@@ -16,7 +17,7 @@ class ELoginCubit extends Cubit<ELoginSates>{
 
   ELoginCubit():super(LoginInitialState());
    static ELoginCubit get(context)=>BlocProvider.of(context);
-  late  Login_Models loginModel;
+    Login_Models? loginModel;
   void userlogin({
     required String email,
     required String password,
@@ -31,12 +32,9 @@ class ELoginCubit extends Cubit<ELoginSates>{
         },
     ).then((value) {
       loginModel=Login_Models.fromjson(value.data);
-      print(value.data);
-      token=loginModel.token.toString();
-      EconoCubite.get(context).gethomedata();
-      EconoCubite.get(context).getFav();
-      password1=password;
-      password1=CacheHelper.saveData(key: 'password1', value: password);
+      print(loginModel.toString());
+       token=loginModel!.token.toString();
+      CacheHelper.saveData(key: 'password1', value: password);
       emit(LoginSuccessState(loginModel));
 
     }).catchError((error){

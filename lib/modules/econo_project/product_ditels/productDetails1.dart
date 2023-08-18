@@ -75,9 +75,9 @@ class _DetailsState extends State<Details> {
                   width: double.infinity,
                   //padding: EdgeInsets.only(top: 60),
                   child: Image(
-                    image: NetworkImage(
-                      '${model!.data!.product!.image}',
-                    ),
+                    image: MemoryImage(
+                        convertBase64Image(
+                            model!.data!.product!.image.toString())),
                     fit: BoxFit.fill,
                   )),
               Stack(

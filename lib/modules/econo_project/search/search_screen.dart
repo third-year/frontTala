@@ -19,8 +19,11 @@ class SearchScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(title: Text('Search',style: TextStyle(color:firstBackColor),),
-            ),
+            appBar: AppBar(title: Text('Search',style:TextStyle(
+                fontSize: 30.0,
+                color: secondBackColor,
+                fontWeight: FontWeight.w500)),),
+
             body: SingleChildScrollView(
               child: Column(children: [
                 defaultFormField(
@@ -67,7 +70,7 @@ class SearchScreen extends StatelessWidget {
   }
   Widget buildSearchProduct(List<ProductsModel> resultname,context) =>
     Container(
-      color: Colors.white,
+      color:EconoCubite.get(context).isDark? Color(0xFF333739):Colors.white,
       child: GridView.count(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
@@ -90,11 +93,13 @@ class SearchScreen extends StatelessWidget {
           EconoCubite.get(context).gotoditels(model.id,context);
         },
     child: Container(
-    color: Colors.white,
+    color:EconoCubite.get(context).isDark? Color(0xFF333739):Colors.white,
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Stack(alignment: AlignmentDirectional.bottomStart, children: [
     Image(
-    image: NetworkImage(model.image.toString()),
+    image:MemoryImage(
+        convertBase64Image(
+        ProfileCubit.get(context).profilemodel!.user!.image.toString())),
     width: double.infinity,
     fit: BoxFit.cover,
     height: 200,
@@ -109,7 +114,7 @@ class SearchScreen extends StatelessWidget {
     model.name.toString(),
     maxLines: 2,
     overflow: TextOverflow.ellipsis,
-    style: TextStyle(fontSize: 14.0, height: 1.3),
+      style: Theme.of(context).textTheme.headlineLarge,
     ),
     Row(
     children: [

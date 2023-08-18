@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 const Color firstBackColor = Color(0xff193C32);
@@ -45,6 +48,7 @@ class DefaultTextaField extends StatelessWidget {
         this.controller,
         this.validate1,
         this.suffix,
+        this.font='Mulish Medium',
         this.suffixPressed})
       : super(key: key);
   final String? Function(String?)? validate1;
@@ -52,6 +56,7 @@ class DefaultTextaField extends StatelessWidget {
   Color? color;
   Color? color1;
   String hint;
+  String?font;
   IconData? icon;
   double? r;
   double? size;
@@ -118,7 +123,9 @@ class DefaultButton extends StatelessWidget {
         this.color = Colors.indigo,
         this.text = '',
         this.textColor = Colors.white,
-        this.icon})
+        this.icon,
+this.font='Mulish Medium',
+      })
       : super(key: key);
   final void Function() onTap;
   double h;
@@ -129,6 +136,8 @@ class DefaultButton extends StatelessWidget {
   String text;
   Color textColor;
   IconData? icon;
+  String?font;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -145,6 +154,7 @@ class DefaultButton extends StatelessWidget {
               ? Text(
             text,
             style: TextStyle(
+              fontFamily: font,
                 fontSize: s,
                 fontWeight: FontWeight.bold,
                 color: textColor),
@@ -162,7 +172,7 @@ class DefaultButton extends StatelessWidget {
                 style: TextStyle(
                     fontSize: s,
                     fontWeight: FontWeight.bold,
-                    color: textColor),
+                    color: textColor,fontFamily: font,),
               ),
             ],
           )),
@@ -170,11 +180,12 @@ class DefaultButton extends StatelessWidget {
   }
 }
 class textbutton extends StatelessWidget {
-  textbutton({Key? key ,required this.text,this.color=Colors.black45,required this.onTap}) : super(key: key);
+  textbutton({Key? key ,required this.text,this.color=Colors.black45,this.font='Mulish Medium',required this.onTap}) : super(key: key);
 //final onPressed;
   final String text;
   final Function()onTap;
   Color color;
+  String?font;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -187,10 +198,15 @@ class textbutton extends StatelessWidget {
             fontWeight: FontWeight.w400,
             decoration: TextDecoration.underline,
             color: color,
-
+            fontFamily: font,
           ) ,),
 
 
       ),);
   }
+}
+
+Uint8List convertBase64Image(String base64String){
+  Uint8List _bytes=base64.decode(base64String.split(',').last);
+  return _bytes;
 }

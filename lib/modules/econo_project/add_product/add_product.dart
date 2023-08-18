@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../../../Text1.dart';
-import '../../../constant.dart';
-import 'cubit_product.dart';
+import 'dart:io';
 
+import '../../../constant.dart';
+import '../../../new_things/widget3/toast.dart';
+import 'cubit_product.dart';
 
 
 class add_product extends StatefulWidget {
@@ -27,6 +28,14 @@ class _add_productState extends State<add_product> {
   late Position L;
   late Position LL;
 
+
+ // final _picker = ImagePicker();
+
+  File? _image;
+
+  String image64 = '';
+  String imageErrorMessage = '';
+
 List address1=[];
   String selectgetcategory ='food';
   String selectstatus ='new';
@@ -35,23 +44,58 @@ List address1=[];
     // TODO: implement initState
     super.initState();
    }
+
   @override
   Widget build(BuildContext context) {
+
+    // Future<void> _openImagePicker() async {
+    //   final XFile? pickedImage =
+    //   await _picker.pickImage(source: ImageSource.gallery);
+    //   if (pickedImage != null) {
+    //     setState(() {
+    //       _image = File(pickedImage.path);
+    //       var bytes = _image?.readAsBytesSync();
+    //       image64 = base64.encode(bytes!);
+    //       print(image64);
+    //     });
+    //   }
+    // }
+
+
+
+
     return BlocProvider(
         create: (BuildContext context) =>product_cubit(),
     child: BlocConsumer<product_cubit,state_product> (
-        listener:(context,state){},
+        listener:(context,state){
+
+          if(state is productErrorState){
+            toast(mas: 'hellooo', colors: Colors.red);
+
+          }
+
+        },
     builder: (context,state) {
                 return Scaffold(
 
 
-        appBar: AppBar(backgroundColor: Color(0xFF439A97),
-
+        appBar: AppBar( actions: [
+          IconButton(onPressed: () {},
+            icon: Icon(Icons.insert_drive_file, size: 35.0,),
+            color: strongColor,
+          ),
+        ],
+          title: Text('Add Product'.toUpperCase(),
+              style: TextStyle(fontSize: 30.0,
+                  color: secondBackColor,
+                  fontWeight: FontWeight.w500)
+          ),
+          elevation: 0.0,
         ),
 body: SingleChildScrollView(
   child:   Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Container(
+        child: Container(
 
         color: Colors.grey[190],
         child:   Form(
@@ -59,18 +103,36 @@ body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                   //  _openImagePicker();
+                  },
+                  child: _image == null
+                      ? CircleAvatar(
+                    radius: 70.0,
+                    backgroundImage: AssetImage(
+                        'images/product.png'),
+                  )
+                      : CircleAvatar(
+                    radius: 60.0,
+                    backgroundImage:
+                    FileImage(File(_image!.path)),
+                  ),
+                ),
+              ),
 
             SizedBox(height: 30,),
 
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text1( text: 'name product :',size: 18,fontWeight:FontWeight.w400),
+                child: Text( 'product',style: Theme.of(context).textTheme.displaySmall,),
               ),
               SizedBox(height: 10,),
               DefaultTextaField(hint: '',color: Colors.white,r: 0,type:TextInputType.text ,     controller: nameproduct,
                 validate1: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'please enter the name product';
+                    return '';
                   }
                   return null;
                 },),
@@ -80,12 +142,12 @@ body: SingleChildScrollView(
 
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text1( text: 'description :',size: 18,fontWeight:FontWeight.w400),
+                child: Text('description',style: Theme.of(context).textTheme.displaySmall),
               ),
               SizedBox(height: 10,),
               DefaultTextaField(hint: '',color: Colors.white,r: 0,type:TextInputType.text,controller: description_product, validate1: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'please enter ';
+                  return ' ';
                 }
                 return null;
               },),
@@ -96,13 +158,13 @@ body: SingleChildScrollView(
 
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text1( text: 'price :',size: 18,fontWeight:FontWeight.w400),
+                child: Text('price',style: Theme.of(context).textTheme.displaySmall),
               ),
               SizedBox(height: 10,),
               DefaultTextaField(hint: '',color: Colors.white,r: 0,type:TextInputType.number ,controller: price_product,
                 validate1: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'please enter ';
+                    return '';
                   }
                   return null;
                 },),
@@ -113,13 +175,14 @@ body: SingleChildScrollView(
 
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text1( text: 'quantity :',size: 18,fontWeight:FontWeight.w400),
+                child: Text('quantity'
+                    ,style: Theme.of(context).textTheme.displaySmall),
               ),
               SizedBox(height: 10,),
               DefaultTextaField(hint: '',color: Colors.white,r: 0,type:TextInputType.number ,controller: quantity_product,
                 validate1: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'please enter ';
+                  return '';
                 }
                 return null;
               },
@@ -131,7 +194,7 @@ body: SingleChildScrollView(
 
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text1( text: 'category :',size: 18,fontWeight:FontWeight.w400),
+                child: Text('category',style: Theme.of(context).textTheme.displaySmall),
               ),
               SizedBox(height: 10,),
               DropdownButton(
@@ -140,14 +203,14 @@ body: SingleChildScrollView(
                 items:
                 [
                 //getcategory().toList(),
-                  DropdownMenuItem(child:Text("furniture") ,value:   "furniture"),
-                  DropdownMenuItem(child:Text( "accessories") ,value:  "accessories"),
-                  DropdownMenuItem(child:Text("food") ,value: "food"),
-                  DropdownMenuItem(child:Text("clothes") ,value: "clothes"),
-                  DropdownMenuItem(child:Text("shoes") ,value: "shoes"),
-                  DropdownMenuItem(child:Text("gifts") ,value: "gifts"),
-                  DropdownMenuItem(child:Text("books") ,value: "books"),
-                  DropdownMenuItem(child:Text("technology") ,value: "technology"),
+                  DropdownMenuItem(child:Text('furniture') ,value:   "furniture"),
+                  DropdownMenuItem(child:Text('accessories') ,value:  "accessories"),
+                  DropdownMenuItem(child:Text('food') ,value: "food"),
+                  DropdownMenuItem(child:Text('clothes') ,value: "clothes"),
+                  DropdownMenuItem(child:Text('shoes') ,value: "shoes"),
+                  DropdownMenuItem(child:Text('gifts') ,value: "gifts"),
+                  DropdownMenuItem(child:Text('books') ,value: "books"),
+                  DropdownMenuItem(child:Text('technology') ,value: "technology"),
                 ],
 
                 onChanged:(value){
@@ -165,16 +228,16 @@ body: SingleChildScrollView(
 
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: Text1( text: 'status :',size: 18,fontWeight:FontWeight.w400),
+                child: Text('status',style: Theme.of(context).textTheme.displaySmall),
               ),
               SizedBox(height: 10,),
               DropdownButton(
-                //padding:  EdgeInsets.only(left: 8.0),
+               // padding:  EdgeInsets.only(left: 8.0),
                   isExpanded: true,
                   value: selectstatus,
                   items: [
-                    DropdownMenuItem(child:Text('new') ,value: 'new'),
-                    DropdownMenuItem(child:Text("old") ,value: "old"),
+                    DropdownMenuItem(child:Text('newstate') ,value: 'new'),
+                    DropdownMenuItem(child:Text('old') ,value: "old"),
                  ],
                   onChanged:(value){
                     setState(() {
@@ -188,11 +251,11 @@ body: SingleChildScrollView(
              Center(
                child: DefaultButton(onTap:() async {
                  getlocation();
-                 LL=await getlocat();
+
                  print(' llll =${L.longitude}');
                  print(' llll =${L.latitude}');
                           },
-               text: 'Click here to access your location',
+               text:'local',
                  w: 300,
 
                ),
@@ -201,25 +264,37 @@ body: SingleChildScrollView(
               Center(
                 child: ConditionalBuilder(
                   condition: state is! productLoadState,
-                  builder:(context)=> DefaultButton(text: 'Add Product',
+                  builder:(context)=> DefaultButton(text:'addproduct',
                       color: Color(0xFF439A97), s: 20,r: 30,w: 200,
-                      onTap: () {
+                      onTap: () async {
+                        LL=await getlocat();
                         address1.add(LL.latitude);
                         address1.add(LL.longitude);
-                        if (formkay.currentState!.validate()) {
-                          print(L.longitude);
-                          product_cubit.product(context).addproduct(
-                              name: nameproduct.text,
-                              price: int.parse(price_product.text),
-                              quantity: int.parse(quantity_product.text),
-                              category: selectgetcategory.toString(),
-                              status: selectstatus.toString(),
-                              description: description_product.text,
-                              image: '',
-                              address: address1,
-                            context: context
-                          );
-                        };
+                        if(image64!='')
+                        {
+                                        if (formkay.currentState!.validate()) {
+                                          print(L.longitude);
+                                          product_cubit
+                                              .product(context)
+                                              .addproduct(
+                                                name: nameproduct.text,
+                                                price: int.parse(
+                                                    price_product.text),
+                                                quantity: int.parse(
+                                                    quantity_product.text),
+                                                category: selectgetcategory
+                                                    .toString(),
+                                                status: selectstatus.toString(),
+                                                description:
+                                                    description_product.text,
+                                                image: image64,
+                                                address: address1,
+                                              );
+                                        }
+                                        ;
+                                      }
+
+                               toast(mas:'image', colors: Colors.red);
 
                                     }),
                   fallback: (context)=>Center(child: CircularProgressIndicator(),),
@@ -268,8 +343,6 @@ body: SingleChildScrollView(
    // return await Geolocator.getCurrentPosition().then((value) => value);
      return L;
    }
-
-   //hear
     //   permission = await Geolocator.checkPermission();
     // if (permission == LocationPermission.denied) {
     //   permission = await Geolocator.requestPermission();
